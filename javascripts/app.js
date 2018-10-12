@@ -1,4 +1,3 @@
-
 //Grid Goes Here
 
 let grid = [
@@ -16,11 +15,18 @@ let grid = [
 
 // Rover Object Goes Here
 
-let rover = {
+let rover1 = {
   direction: "N",
   x: 0,
   y: 0,
   travelLog: [[0,0]],
+};
+
+let rover2 = {
+  direction: "S",
+  x: 9,
+  y: 9,
+  travelLog: [[9,9]],
 };
 
 // ======================
@@ -36,8 +42,7 @@ function turnLeft(rover) {
               break;
     case "E": rover.direction = "N";
               break;                              
-  }
-    
+  }   
 };
 
 function turnRight(rover){
@@ -59,30 +64,24 @@ function moveForward(rover) {
       return console.log("ERROR: " + grid[rover.y - 1][rover.x] + " found, can't proceed!");
     };
     rover.y--;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   } else if (rover.direction === "S" && rover.y !== 9) {
     if (grid[rover.y + 1][rover.x] !== "clear") {
       return console.log("ERROR: " + grid[rover.y + 1][rover.x] + " found, can't proceed!");
     };
     rover.y++;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   } else if (rover.direction === "E" && rover.x !== 9) {
     if (grid[rover.y][rover.x + 1] !== "clear") {
       return console.log("ERROR: " + grid[rover.y][rover.x + 1] + " found, can't proceed!");
     };
     rover.x++;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   } else if (rover.direction === "W" && rover.x !== 0) {
     if (grid[rover.y][rover.x - 1] !== "clear") {
       return console.log("ERROR: " + grid[rover.y][rover.x - 1] + " found, can't proceed!");
     };
     rover.x--;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   }   else return console.log("ERROR: ROVER CAN'T MOVE OUT OFF GRID!");
+  rover.travelLog.push([rover.x, rover.y]);
+  console.log("Rover located at: " + rover.x + "," + rover.y);
 };
 
 function moveBackward(rover){
@@ -91,33 +90,27 @@ function moveBackward(rover){
       return console.log("ERROR: " + grid[rover.y + 1][rover.x] + " found, can't proceed!");
     };
     rover.y++;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   } else if (rover.direction === "S" && rover.y !== 0) {
     if (grid[rover.y - 1][rover.x] !== "clear") {
       return console.log("ERROR: " + grid[rover.y - 1][rover.x] + " found, can't proceed!");
     };
     rover.y--;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   } else if (rover.direction === "E" && rover.x !== 0) {
     if (grid[rover.y][rover.x - 1] !== "clear") {
       return console.log("ERROR: " + grid[rover.y][rover.x - 1] + " found, can't proceed!");
     };
     rover.x--;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   } else if (rover.direction === "W" && rover.x !== 9) {
     if (grid[rover.y][rover.x + 1] !== "clear") {
       return console.log("ERROR: " + grid[rover.y][rover.x + 1] + " found, can't proceed!");
     };
     rover.x++;
-    rover.travelLog.push([rover.x, rover.y]);
-    console.log("Rover located at: " + rover.x + "," + rover.y);
   }   else return console.log("ERROR: ROVER CAN'T MOVE OUT OFF GRID!");
+  rover.travelLog.push([rover.x, rover.y]);
+  console.log("Rover located at: " + rover.x + "," + rover.y);
 };
 
-function commands(str) {
+function commands(str, rover) {
   for (let i = 0; i < str.length; i++) {
     if (str[i] !== "f" && str[i] !== "b" && str[i] !== "r" && str[i] !== "l") {
       console.log("ERROR: " + str[i] + " IS NOT A VALID COMMAND!");
